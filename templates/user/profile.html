@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Профиль</li>
+            </ol>
+        </nav>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}danger{% else %}success{% endif %}"
+                     role="alert">
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <h2>Профиль пользователя {{ user.username }}</h2>
+        <hr>
+        <p><span style="font-weight: 700">ФИО:</span> {{ user.last_name }}
+            {{ user.first_name }}{% if user.middle_name %}
+                {{ user.middle_name }}{% endif %}</p>
+        <p><span style="font-weight: 700">Номер телефона:</span> {{ user.number }}
+        </p>
+        <p>
+            <span style="font-weight: 700">Почта:</span> {{ user.email }} {% if user.is_email_confirmed %}
+            <span class="link-success" style="margin-left: 15px;">Подтверждена</span>
+        {% else %}
+            <span class="link-danger" style="margin-left: 15px;">Не подтверждена</span> <a
+                    href="{% url 'user:send_code_email' %}" style="margin-left: 15px;">Подтвердить</a>
+        {% endif %}
+            <a href="{% url 'user:change_email' %}" style="margin-left: 15px;">Изменить</a>
+        </p>
+        <p><span style="font-weight: 700">Статус:</span> {{ user.status }}</p>
+        <div class="row">
+            <div class="col-md-2 col-sm-12 g-4">
+                <a href="{% url 'user:change_info' %}" class="btn btn-primary">Изменить данные</a>
+            </div>
+            <div class="col-md-2 col-sm-12 g-4">
+                <a href="{% url 'user:change_password' %}" class="btn btn-primary">Сменить пароль</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

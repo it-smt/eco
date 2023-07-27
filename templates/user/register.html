@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Регистрация</li>
+		</ol>
+	</nav>
+	{% if messages %}
+	<div class="alert alert-danger" role="alert">
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	</div>
+	{% endif %}
+	<h1 class="h1">Регистрация</h1>
+	<hr>
+	<form class="row g-3" method="post" novalidate>
+		{% csrf_token %}
+		{% for field in form %}
+		<div class="{% if field.label == 'Статус пользователя' %}col-12{% else %}col-md-6 col-sm-12{% endif %}">
+			<label class="form-label">{{ field.label }}</label>
+			{{ field }}
+			<div style="color: red;margin: 8px 0 0 0;">
+				{% for error in field.errors %}
+				<p style="margin: 0;">{{ error }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+		<p>Уже зарегистрированы? <a href="{% url 'user:login' %}">Войти сейчас</a>.
+		</p>
+		<div class="row justify-content-center" style="margin: 10px 0 0 0;">
+			<button class="btn btn-primary" style="max-width: 200px;" type="submit">Зарегистрироваться</button>
+		</div>
+	</form>
+	<hr>
+</div>
+{% endblock %}

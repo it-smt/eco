@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявки{% endblock %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Заявки</li>
+		</ol>
+	</nav>
+	<h1>Заявки</h1>
+	<hr>
+	<div class="row">
+		{% for message in messages %}
+		<div class="col-12 g-4">
+			<div class="card text-bg-light">
+				<div class="card-header">{{ message.author.get_full_name }}</div>
+				<div class="card-body">
+					<h5 class="card-title">Тип: {{ message.type }} | Вес: {{ message.weight }} кг</h5>
+					<a href="{% url 'main:message_detail' message.pk %}" class="btn btn-primary"
+						style="margin-top: 10px;">Подробнее</a>
+				</div>
+			</div>
+		</div>
+		{% empty %}
+		<p>Заявок пока нет.</p>
+		{% endfor %}
+		{% include 'includes/pagination.html' with page=messages %}
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">Главная</li>
+		</ol>
+	</nav>
+	<h1 class="h1">Главная</h1>
+	<hr>
+	<div class="row row-cols-1 g-4">
+		<div class="col-12">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="{% static 'img/1.jpg' %}" class="img-fluid rounded-start" alt="...">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">Чем мы занимаемся?</h5>
+							<p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
+								corporis aspernatur, quidem cum amet dignissimos facere voluptatum laborum quam sit
+								doloribus laboriosam sunt exercitationem minus dicta nulla nam laudantium impedit, iure
+								eaque cupiditate, earum asperiores. Qui minus assumenda a et? Quod veniam, eaque minima
+								quia hic in doloribus, fugiat nobis nihil autem dolore deserunt laboriosam ducimus
+								quibusdam recusandae! Velit cupiditate maxime placeat ipsam deleniti iste facilis
+								aliquam hic, aliquid nemo! Unde possimus dolorem, a itaque nisi corrupti reprehenderit
+								perspiciatis sunt?
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">Где мы работаем?</h5>
+							<p class="card-text">Пока что мы работаем только в городе Нижневартовск, но в дальнейшем
+								будем работать по всей России.
+							</p>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img src="{% static 'img/2.jpeg' %}" class="img-fluid rounded-end" alt="...">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col-md-4">
+						<img src="{% static 'img/3.jpg' %}" class="img-fluid rounded-start" alt="...">
+					</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h5 class="card-title">Card title</h5>
+							<p class="card-text">This is a wider card with supporting text below as a
+								natural lead-in to additional content. This content is a little bit
+								longer.
+							</p>
+							<p class="card-text"><small class="text-body-secondary">Last updated 3 mins
+									ago</small></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+</div>
+{% endblock %}

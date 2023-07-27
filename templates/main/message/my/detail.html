@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Мои заявки | {{ message.author.get_full_name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+	<p style="font-style: italic;">{{ message.submitted }}</p>
+	<div class="row">
+		<div class="col-md-6 col-sm-12 g-4">
+			<h2>Сведения о заказчике</h2>
+			<hr>
+			<p style="font-style: italic;">
+				<span style="font-weight: bold;">ФИО:</span> {{ message.author.get_full_name }}
+			</p>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Адрес, откуда забрать:</span>
+				{{ message.address }}</p>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Номер:</span> <a
+					href="tel:{{ message.number }}">{{ message.author.number }}</a></p>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Присутствует с</span> {{ message.time_s }}
+				<span style="font-weight: bold;">До</span> {{ message.time_b }}
+			</p>
+		</div>
+		<div class="col-md-6 col-sm-12 g-4">
+			<h2>Сведения о товаре</h2>
+			<hr>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Тип:</span> {{ message.type }}</p>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Вес:</span> {{ message.weight }} кг</p>
+		</div>
+		<div class="col-md-6 col-sm-12 g-4">
+			<h2>Сведения о исполнителе</h2>
+			<hr>
+			{% if message.worker_is_not_none %}
+			<p style="font-style: italic;"><span style="font-weight: bold;">ФИО: </span>
+				{{ message.worker.get_full_name }}</p>
+			<p style="font-style: italic;"><span style="font-weight: bold;">Номер телефона: </span>
+				<a href="tel:{{ message.worker.number }}">{{ message.worker.number }}</a></p>
+			{% else %}
+			<p>Скоро появится</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

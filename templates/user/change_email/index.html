@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль | Изменение почты{% endblock %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'user:profile' %}">Профиль</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Изменение почты</li>
+		</ol>
+	</nav>
+	<h2>Изменение почты</h2>
+	<hr>
+	<form class="row g-3" method="post" novalidate>
+		{% csrf_token %}
+		<div class="col-12">
+			<label class="form-label">{{ form.email.label }}</label>
+			{{ form.email }}
+			<div style="color: red;margin: 8px 0 0 0;">
+				{% for error in form.email.errors %}
+				<p style="margin: 0;">{{ error }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="row justify-content-center" style="margin: 10px 0 0 0;">
+			<button class="btn btn-primary" style="max-width: 150px;" type="submit">Изменить</button>
+		</div>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Вход</li>
+		</ol>
+	</nav>
+	{% if messages %}
+	<div class="alert alert-success" role="alert">
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	</div>
+	{% endif %}
+	<h2>Вход</h2>
+	<hr>
+	{% if user.is_authenticated %}
+	<p>Вы уже выполнили вход.</p>
+	{% else %}
+	{% if form.errors %}
+	<div class="alert alert-danger" role="alert">
+		Неверное имя пользователя или пароль.
+	</div>
+	{% endif %}
+	<form class="row g-3" method="post" novalidate>
+		{% csrf_token %}
+		{% for field in form %}
+		<div class="col-md-6 col-sm-12">
+			<label class="form-label">{{ field.label }}</label>
+			{{ field }}
+			<div style="color: red;margin: 8px 0 0 0;">
+				{% for error in field.errors %}
+				<p style="margin: 0;">{{ error }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+		<div class="row g-2 d-flex">
+			<p class="col-md-6 col-sm-12">
+				Еще не зарегистрировались? Сделайте это <a href="{% url 'user:register' %}">сейчас</a>.
+			</p>
+			<p class="col-md-6 col-sm-12">Забыли пароль? Сбросить <a href="{% url 'user:password_reset' %}">сейчас</a>.
+			</p>
+		</div>
+		<div class="row justify-content-center" style="margin: 10px 0 0 0;">
+			<button class="btn btn-primary" style="max-width: 120px;" type="submit">Войти</button>
+		</div>
+	</form>
+	{% endif %}
+</div>
+{% endblock %}

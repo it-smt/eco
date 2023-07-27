@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Мои заявки | Форма заявки{% endblock %}
+
+{% block css %}https://cdn.jsdelivr.net/npm/suggestions-jquery@20.3.0/dist/css/suggestions.min.css"{% endblock %}
+
+{% block content %}
+<div class="container">
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="{% url 'main:index' %}">Главная</a></li>
+			<li class="breadcrumb-item"><a href="{% url 'main:my_messages' %}">Мои заявки</a></li>
+			<li class="breadcrumb-item active" aria-current="page">Форма заявки</li>
+		</ol>
+	</nav>
+	<h1 class="h1">Форма заявки</h1>
+	<hr>
+	{% if user.status == 'Заказчик' %}
+	<form class="row g-3" method="post" novalidate>
+		{% csrf_token %}
+		{% for field in form %}
+		<div class="{% if field.label == 'Адрес' %}col-12{% else %}col-md-6 col-sm-12{% endif %}">
+			<label class="form-label">{{ field.label }}</label>
+			{{ field }}
+			<div style="color: red;margin: 8px 0 0 0;">
+				{% for error in field.errors %}
+				<p style="margin: 0;">{{ error }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+		<div class="row justify-content-center" style="margin: 10px 0 0 0;">
+			<button class="btn btn-primary" style="max-width: 150px;" type="submit">Создать заявку</button>
+		</div>
+	</form>
+	{% else %}
+	<p>У вас нет доступа к этой странице.</p>
+	{% endif %}
+</div>
+{% endblock %}

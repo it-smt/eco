@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Подтверждение почты{% endblock %}
+
+{% block content %}
+<div class="container">
+	{% if messages %}
+	<div class="alert alert-danger" role="alert">
+		{% for message in messages %}
+		{{ message }}
+		{% endfor %}
+	</div>
+	{% endif %}
+	<h1 class="h1">Подтверждение почты</h1>
+	<hr>
+	<p>На почту {{ user.email }} отправлен код подтверждения.</p>
+	<form action="" class="row g-4" method="post">
+		{% csrf_token %}
+		<div class="col-12">
+			<label class="form-label">{{ form.code.label }}</label>
+			{{ form.code }}
+			<div style="color: red;margin: 8px 0 0 0;">
+				{% for error in forms.code.errors %}
+				<p style="margin: 0;">{{ error }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="row justify-content-center" style="margin: 10px 0 0 0;">
+			<button class="btn btn-primary" style="max-width: 150px;" type="submit">Отправить</button>
+		</div>
+	</form>
+</div>
+{% endblock %}
